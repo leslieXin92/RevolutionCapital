@@ -1,0 +1,71 @@
+{
+  "name": "revolution-capital",
+  "private": true,
+  "main": "main.js",
+  "homepage": ".",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently 'npm run web' 'npm run electron'",
+    "web": "vite",
+    "electron": "electron .",
+    "build": "tsc && vite build",
+    "dist": "npm run build && electron-builder",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "revolution-capital",
+    "productName": "Revolution Capital",
+    "mac": {
+      "category": "health",
+      "icon": "./build/icon.ico"
+    },
+    "win": {
+      "icon": "./build/icon.ico"
+    }
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-menubar": "^1.0.4",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "@types/react-router-dom": "^5.3.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "concurrently": "^8.2.2",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.379.0",
+    "qs": "^6.12.1",
+    "react": "^18.2.0",
+    "react-day-picker": "^8.10.1",
+    "react-dom": "^18.2.0",
+    "react-resizable-panels": "^2.0.19",
+    "react-router-dom": "^6.23.1",
+    "recharts": "^2.12.7",
+    "styled-components": "^6.1.11",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "@types/qs": "^6.9.15",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "electron": "^30.0.8",
+    "electron-builder": "^24.13.3",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
+  }
+}
