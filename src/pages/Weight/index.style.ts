@@ -5,6 +5,4 @@ export const WeightContainer = styled.div`
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
 `

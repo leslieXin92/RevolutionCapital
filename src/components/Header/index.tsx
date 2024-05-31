@@ -69,7 +69,7 @@ export function Header() {
         {rightIcons.map((icon, index) => {
           const StyledIcon = styled(icon.icon)`${IconStyle}`
           return (
-            <Tooltip delayDuration={0}>
+            <Tooltip key={index} delayDuration={0}>
               <TooltipTrigger asChild>
                 <div
                   className={cn(
