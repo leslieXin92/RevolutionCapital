@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
-import { LucideIcon, Slash } from 'lucide-react'
+import { LucideIcon, Slash, LineChart } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,14 +9,15 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { useHeaderStore } from '@/store/useHeaderStore.ts'
+import { buttonVariants } from '@/components/ui/button.tsx'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip.tsx'
 import { HeaderContainer, IconStyle, IconsContainer } from '@/components/Header/index.style.ts'
-import { LineChart } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { cn } from '@/lib/utils.ts'
+import { useHeaderStore } from '@/store/useHeaderStore.ts'
 
 type RightIconType = {
   icon: LucideIcon
+  tooltip?: string
   callback: () => void
 }
 
@@ -29,6 +32,7 @@ export function Header() {
     'weight': [
       {
         icon: LineChart,
+        tooltip: 'chart',
         callback: () => navigator('/weight/overview')
       }
     ],
@@ -38,7 +42,6 @@ export function Header() {
   useEffect(() => {
     const curIcons = iconsMapper[curPathStack.join('/')]
     if (!curIcons) return
-    console.log(curIcons)
     setRightIcons(curIcons)
   }, [curPathStack])
 
@@ -49,7 +52,9 @@ export function Header() {
           {curPathStack.map((path, index, array) => (
             <Fragment key={path}>
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/#/${curPathStack.slice(0, index + 1).join('/')}`}>{path}</BreadcrumbLink>
+                <BreadcrumbLink href={`/#/${curPathStack.slice(0, index + 1).join('/')}`}>
+                  {path}
+                </BreadcrumbLink>
               </BreadcrumbItem>
 
               {index !== array.length - 1 && <BreadcrumbSeparator>
@@ -63,8 +68,25 @@ export function Header() {
       <IconsContainer>
         {rightIcons.map((icon, index) => {
           const StyledIcon = styled(icon.icon)`${IconStyle}`
-          return <StyledIcon key={index} onClick={icon.callback} /> // todo - 报错
-          // return <icon.icon key={index}  onClick={icon.callback} />
+          return (
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger asChild>
+                <div
+                  className={cn(
+                    buttonVariants({ variant: 'link', size: 'icon' }),
+                    'h-9 w-9 cursor-pointer'
+                  )}
+                  onClick={icon.callback}
+                >
+                  <StyledIcon key={index} onClick={icon.callback} />
+                  <span className="sr-only">{icon.tooltip}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="flex items-center gap-4">
+                {icon.tooltip}
+              </TooltipContent>
+            </Tooltip>
+          )
         })}
       </IconsContainer>
     </HeaderContainer>

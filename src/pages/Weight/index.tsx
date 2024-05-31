@@ -6,9 +6,8 @@ import { Button } from '@/components/ui/button.tsx'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
 import Modal from '@/components/Modal'
-import { WeightContainer, DayContent } from './index.style.ts'
+import { WeightContainer } from './index.style.ts'
 import { insertWeightRecord, updateWeightRecord } from '@/service/weight.ts'
-// import { useNavigate } from 'react-router-dom'
 import { useWeightStore } from '@/store/useWeightStore.ts'
 
 function Weight() {
@@ -23,7 +22,6 @@ function Weight() {
   const fetchWeightRecords = useWeightStore(state => state.fetchWeightRecords)
 
   const { toast } = useToast() // todo - 没有生效
-  // const navigator = useNavigate()
 
   useEffect(() => {
     if (!curMonth) return
@@ -79,10 +77,12 @@ function Weight() {
       const curWeightRecord = weightRecords.find(i => i.date === format(date, 'yyyy-MM-dd'))
       const curWeight = curWeightRecord?.weight
       return (
-        <DayContent>
-          <div className="date">{date.getDate()}</div>
-          <div className="weight">{curWeight ? (curWeight as number).toFixed(1) : '-'}</div>
-        </DayContent>
+        <div className="flex flex-col justify-center items-center">
+          <div>{date.getDate()}</div>
+          <div className="text-xs text-gray-400 text-opacity-80">
+            {curWeight ? (curWeight as number).toFixed(1) : '-'}
+          </div>
+        </div>
       )
     }
   }

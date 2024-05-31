@@ -7,8 +7,7 @@ export const HeaderContainer = styled.div`
     width: 100%;
     height: 2em;
     padding: 0 1em 1em 2em;
-    //background-color: red;
-    border-bottom: 1px dashed #efefef;
+    border-bottom: 1px solid #99999922;
 `
 
 export const IconsContainer = styled.div`
