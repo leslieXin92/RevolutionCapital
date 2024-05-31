@@ -40,7 +40,10 @@ export function Header() {
   }
 
   useEffect(() => {
-    const curIcons = iconsMapper[curPathStack.join('/')]
+    const curIcons = iconsMapper[curPathStack.join('/')]?.map(item => ({
+      ...item,
+      icon: styled(item.icon)`${IconStyle}`
+    }))
     if (!curIcons) return
     setRightIcons(curIcons)
   }, [curPathStack])
@@ -66,28 +69,25 @@ export function Header() {
       </Breadcrumb>
 
       <IconsContainer>
-        {rightIcons.map((icon, index) => {
-          const StyledIcon = styled(icon.icon)`${IconStyle}`
-          return (
-            <Tooltip key={index} delayDuration={0}>
-              <TooltipTrigger asChild>
-                <div
-                  className={cn(
-                    buttonVariants({ variant: 'link', size: 'icon' }),
-                    'h-9 w-9 cursor-pointer'
-                  )}
-                  onClick={icon.callback}
-                >
-                  <StyledIcon key={index} onClick={icon.callback} />
-                  <span className="sr-only">{icon.tooltip}</span>
-                </div>
-              </TooltipTrigger>
-              <TooltipContent side="bottom" className="flex items-center gap-4">
-                {icon.tooltip}
-              </TooltipContent>
-            </Tooltip>
-          )
-        })}
+        {rightIcons.map((icon, index) => (
+          <Tooltip key={index} delayDuration={0}>
+            <TooltipTrigger asChild>
+              <div
+                className={cn(
+                  buttonVariants({ variant: 'link', size: 'icon' }),
+                  'h-9 w-9 cursor-pointer'
+                )}
+                onClick={icon.callback}
+              >
+                <icon.icon key={index} onClick={icon.callback} />
+                <span className="sr-only">{icon.tooltip}</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="flex items-center gap-4">
+              {icon.tooltip}
+            </TooltipContent>
+          </Tooltip>
+        ))}
       </IconsContainer>
     </HeaderContainer>
   )
