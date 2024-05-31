@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { createStore } from './index.ts'
 import { getWeightRecords } from '@/service/weight.ts'
 
 type WeightRecordType = {
@@ -12,11 +12,16 @@ interface WeightState {
   fetchWeightRecords: (month: string) => Promise<void>
 }
 
-export const useWeightStore = create<WeightState>(set => ({
-  weightRecords: [],
-  setWeightRecords: (records: WeightRecordType[]) => set(() => ({ weightRecords: records })),
-  fetchWeightRecords: async (month: string) => {
-    const { data: weightRecords } = await getWeightRecords(month)
-    set(() => ({ weightRecords }))
-  }
-}))
+export const useWeightStore = createStore<WeightState>(
+  'weightStore',
+  (set) => ({
+      weightRecords: [],
+      setWeightRecords: (records: WeightRecordType[]) => {
+        set({ weightRecords: records })
+      },
+      fetchWeightRecords: async (month: string) => {
+        const { data: weightRecords } = await getWeightRecords(month)
+        set({ weightRecords })
+      }}),
+  {}
+)
