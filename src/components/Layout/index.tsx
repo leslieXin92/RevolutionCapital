@@ -54,7 +54,7 @@ function Layout({ children }: LayoutProps) {
         <ResizableHandle withHandle />
 
         <ContentResizablePanelContainer minSize={30}>
-          <Header />
+          {location.pathname !== '/home' && <Header />}
           <ScreenContainer>{children}</ScreenContainer>
         </ContentResizablePanelContainer>
       </ResizablePanelGroupContainer>
