@@ -21,9 +21,9 @@ function Overview() {
   const customTooltipCom: ContentType<number, string> = ({ payload, active }) => {
     if (!active) return null
     return (
-      <div style={{ backgroundColor: '#f5f5f5', border: '1px solid #ccc', padding: '10px' }}>
+      <div>
         {payload?.map((item, index) => (
-          <p key={index} style={{ color: item.color }}>
+          <p key={index} style={{ color: item.color, textShadow: `0 0 1px ${item.color}` }}>
             {item.value}
           </p>
         ))}
