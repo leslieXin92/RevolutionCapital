@@ -46,7 +46,7 @@ function Overview() {
       >
         <CartesianGrid strokeDasharray="3 3" stroke="#99999966" />
         <XAxis dataKey="name" className="text-xs" stroke="#999999bb" />
-        <YAxis className="text-xs" domain={[110, 130]} stroke="#999999bb" />
+        <YAxis className="text-xs" domain={[115, 125]} stroke="#999999bb" />
         <Tooltip content={customTooltipCom} />
         <Line type="monotone" dataKey="weight" stroke="#008b8b" />
       </LineChart>

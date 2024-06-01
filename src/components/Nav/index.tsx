@@ -4,6 +4,7 @@ import { CircleGauge, Inbox, LucideIcon, Utensils, Moon, Sun } from 'lucide-reac
 import { useTheme } from '@/components/ThemeProvider'
 import { buttonVariants } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { ModeIconContainer } from '@/components/Nav/index.style.ts'
 import { useHeaderStore } from '@/store/useHeaderStore.ts'
 import { cn } from '@/lib/utils'
 
@@ -59,7 +60,7 @@ export function Nav({ isCollapsed }: NavProps) {
       return (
         <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
-            <div
+            <ModeIconContainer
               className={cn(
                 buttonVariants({ variant: 'link', size: 'icon' }),
                 'h-9 w-9 cursor-pointer'
@@ -69,7 +70,7 @@ export function Nav({ isCollapsed }: NavProps) {
               {theme === 'light' && <Sun className="h-5 w-5" />}
               {theme === 'dark' && <Moon className="h-5 w-5" />}
               <span className="sr-only">{theme}</span>
-            </div>
+            </ModeIconContainer>
           </TooltipTrigger>
           <TooltipContent side="right" className="flex items-center gap-4">
             {theme}
@@ -79,7 +80,7 @@ export function Nav({ isCollapsed }: NavProps) {
     }
 
     return (
-      <div
+      <ModeIconContainer
         className={cn(
           buttonVariants({ variant: 'link', size: 'sm' }),
           'justify-start cursor-pointer'
@@ -89,7 +90,7 @@ export function Nav({ isCollapsed }: NavProps) {
         {theme === 'light' && <Sun className="h-5 w-5 mr-2" />}
         {theme === 'dark' && <Moon className="h-5 w-5 mr-2" />}
         {theme}
-      </div>
+      </ModeIconContainer>
     )
   }, [isCollapsed, theme])
 
